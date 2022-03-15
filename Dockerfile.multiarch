@@ -4,13 +4,13 @@ FROM --platform=$BUILDPLATFORM golang:1.18rc1 as build-env
 # based on TARGETPLATFORM provided by Docker.
 COPY --from=tonistiigi/xx:golang-1.0.0 / /
 
-ARG APP_FOLDER
+ARG APP_FOLDER=/opt
 
-ADD . /opt
-WORKDIR /opt
+ADD . ${APP_FOLDER}
+WORKDIR ${APP_FOLDER}
 
 # Compile independent executable using go wrapper from xx:golang
-ARG TARGETPLATFORM
+ARG TARGETPLATFORM=armv7
 RUN CGO_ENABLED=0 go build -a -ldflags '-extldflags "-static"' -o /bin/main ./cmd/nfs-subdir-external-provisioner
 
 FROM --platform=$TARGETPLATFORM alpine:3.12
