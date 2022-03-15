@@ -10,7 +10,7 @@ ADD . ${APP_FOLDER}
 WORKDIR ${APP_FOLDER}
 
 # Compile independent executable using go wrapper from xx:golang
-ARG TARGETPLATFORM=armv7
+ARG TARGETPLATFORM=linux/arm/v7
 RUN CGO_ENABLED=0 go build -a -ldflags '-extldflags "-static"' -o /bin/main ./cmd/nfs-subdir-external-provisioner
 
 FROM --platform=$TARGETPLATFORM alpine:3.12
