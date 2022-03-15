@@ -41,6 +41,7 @@ jobs:
       run: |        
         docker buildx build \
         --platform ${{ steps.prepare.outputs.docker_platform }} \
+        --build-arg TARGETPLATFORM=armv7 \
         --tag ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }} \
         --file ./Dockerfile.multiarch \
         --output type=image,push=true .

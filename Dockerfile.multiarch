@@ -6,8 +6,8 @@ COPY --from=tonistiigi/xx:golang-1.0.0 / /
 
 ARG APP_FOLDER
 
-ADD . ${APP_FOLDER}
-WORKDIR ${APP_FOLDER}
+ADD . /opt
+WORKDIR /opt
 
 # Compile independent executable using go wrapper from xx:golang
 ARG TARGETPLATFORM
